@@ -51,7 +51,7 @@ class RegisterController extends GetxController {
         await StorageProvider.write(StorageKey.status, "logged");
         Get.offAllNamed(Routes.LOGIN);
       } else {
-        Get.snackbar("sorry", "Login Gagal", backgroundColor: Colors.orange);
+        Get.snackbar("sorry", "registrasi Gagal", backgroundColor: Colors.orange);
       }
     }loading(false);
   }on dio.DioException catch (e) {loading(false);
