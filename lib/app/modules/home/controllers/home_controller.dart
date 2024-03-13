@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../../routes/app_pages.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -17,6 +18,7 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   void increment() => count.value++;
