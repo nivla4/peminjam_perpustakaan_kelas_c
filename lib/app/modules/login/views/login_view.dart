@@ -34,6 +34,10 @@ class LoginView extends GetView<LoginController> {
                   hintStyle: TextStyle(color: Colors.black),
                   filled: true,
                   fillColor: Colors.white, // Set hint text color to white
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(), // Set border color
+                    borderRadius: BorderRadius.circular(15), // Set border radius
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -44,13 +48,17 @@ class LoginView extends GetView<LoginController> {
               ),
               SizedBox(height: 10), // Add spacing
               TextFormField(
-                controller: controller.passwordController,
-                style: TextStyle(color: Colors.black), // Set text color to white
+                controller: controller.passwordController, // Set text color to white
                 decoration: InputDecoration(
                   hintText: "Masukkan Password",
-                  hintStyle: TextStyle(color: Colors.black),
+                  fillColor: Colors.white,
                   filled: true,
-                  fillColor: Colors.white, // Set hint text color to white
+                  hintStyle: const TextStyle(color: Colors.black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(15),
+                    borderSide: BorderSide(), // Set border color
+                     // Set border radius
+                  ),
                 ),
                 validator: (value) {
                   if (value!.isEmpty) {

@@ -31,6 +31,13 @@ class HomeView extends GetView<HomeController> {
               },
             ),
             ListTile(
+              leading: Icon (Icons.settings),
+              title: Text('Pengaturan'),
+              onTap: () {
+                // Navigate to appropriate route
+              },
+            ),
+            ListTile(
               leading: Icon (Icons.info),
               title: Text('Tentang'),
               onTap: () {
@@ -41,7 +48,7 @@ class HomeView extends GetView<HomeController> {
               leading: Icon (Icons.exit_to_app),
               title: Text('Keluar'),
               onTap: () => Get.toNamed(Routes.LOGIN),
-                // Navigate to appropriate route
+              // Navigate to appropriate route
             ),
           ],
         ),
@@ -70,12 +77,16 @@ class HomeView extends GetView<HomeController> {
                       padding: EdgeInsets.all(30),
                       child: Column(
                         children: [
-                          IconButton(
-                            onPressed: () => Get.toNamed(Routes.BOOK),
-                            icon: Icon(Icons.book, size: 80),
-                            tooltip: 'Buku',
+                          Stack(
+                            children: [
+                              Icon(Icons.book, size: 80),
+                            ],
                           ),
-                          Text('Buku'),
+                          SizedBox(height: 8),
+                          ElevatedButton(
+                            onPressed: () => Get.toNamed(Routes.BOOK),
+                            child: Text('List Buku'),
+                          ),
                         ],
                       ),
                     ),
@@ -87,12 +98,16 @@ class HomeView extends GetView<HomeController> {
                       padding: EdgeInsets.all(30),
                       child: Column(
                         children: [
-                          IconButton(
-                            onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
-                            icon: Icon(Icons.assignment, size: 80),
-                            tooltip: 'Peminjaman',
+                          Stack(
+                            children: [
+                              Icon(Icons.assignment, size: 80),
+                            ],
                           ),
-                          Text('Peminjaman'),
+                          SizedBox(height: 8),
+                          ElevatedButton(
+                            onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
+                            child: Text('Peminjaman'),
+                          ),
                         ],
                       ),
                     ),
@@ -101,7 +116,7 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             SizedBox(height: 20), // Add some space between buttons and columns
-             Center(
+            Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -113,12 +128,16 @@ class HomeView extends GetView<HomeController> {
                     padding: EdgeInsets.all(30),
                     child: Column(
                       children: [
-                        IconButton(
-                          onPressed: () => Get.toNamed(Routes.BOOK),
-                          icon: Icon(Icons.book, size: 80),
-                          tooltip: 'Buku',
+                        Stack(
+                          children: [
+                            Icon(Icons.money, size: 80),
+                          ],
                         ),
-                        Text('Buku'),
+                        SizedBox(height: 8),
+                        ElevatedButton(
+                          onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
+                          child: Text('Cek Denda'),
+                        ),
                       ],
                     ),
                   ),
@@ -130,12 +149,16 @@ class HomeView extends GetView<HomeController> {
                     padding: EdgeInsets.all(30),
                     child: Column(
                       children: [
-                        IconButton(
-                          onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
-                          icon: Icon(Icons.assignment, size: 80),
-                          tooltip: 'Peminjaman',
+                        Stack(
+                          children: [
+                            Icon(Icons.arrow_circle_up, size: 80),
+                          ],
                         ),
-                        Text('Peminjaman'),
+                        SizedBox(height: 8),
+                        ElevatedButton(
+                          onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
+                          child: Text('Pengembalian'),
+                        ),
                       ],
                     ),
                   ),
@@ -145,6 +168,28 @@ class HomeView extends GetView<HomeController> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people),
+            label: 'Profil',
+          ),
+        ],
+        currentIndex: 0,
+        selectedItemColor: Colors.purple,
+        onTap: (int index) {
+          // Handle navigation to different tabs
+        },
+      ),
     );
+
   }
 }
