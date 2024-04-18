@@ -10,45 +10,54 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Menu Utama'),
+        title: Text(
+          'Menu Utama',
+          style: TextStyle(
+            color: Colors.white, // Set the text color to black
+          ),
+        ),
         centerTitle: true,
+        backgroundColor: Colors.deepPurpleAccent, // Set the background color of the app bar to white
       ),
       backgroundColor: Colors.purple, // Set background color to purple
-      drawer: new Drawer( // Add Drawer
+      drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            UserAccountsDrawerHeader(accountName: new Text("Alvin", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0),),
-              accountEmail: new Text("alvin@gmail.com"),
+            UserAccountsDrawerHeader(
+              accountName: Text(
+                "Alvin",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17.0,),
+              ),
+              accountEmail: Text("alvin@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage('assets/logo.png'),
               ),
             ),
             ListTile(
-              leading: Icon (Icons.person),
+              leading: Icon(Icons.person),
               title: Text('Profil'),
               onTap: () {
                 // Navigate to appropriate route
               },
             ),
             ListTile(
-              leading: Icon (Icons.settings),
+              leading: Icon(Icons.settings),
               title: Text('Pengaturan'),
               onTap: () {
                 // Navigate to appropriate route
               },
             ),
             ListTile(
-              leading: Icon (Icons.info),
+              leading: Icon(Icons.info),
               title: Text('Tentang'),
               onTap: () {
                 // Navigate to appropriate route
               },
             ),
             ListTile(
-              leading: Icon (Icons.exit_to_app),
+              leading: Icon(Icons.exit_to_app),
               title: Text('Keluar'),
-              onTap: () => Get.toNamed(Routes.LOGIN),
-              // Navigate to appropriate route
+              onTap: () => Get.toNamed(Routes.LOGIN), // Navigate to login page
             ),
           ],
         ),
@@ -59,107 +68,50 @@ class HomeView extends GetView<HomeController> {
             SizedBox(height: 20), // Add some space between logo and buttons
             Image.asset(
               'assets/logo.png', // Replace 'assets/logo.png' with your logo path
-              height: 300,
-              width: 300,
+              height: 200,
+              width: 200,
             ),
             SizedBox(height: 20), // Add some space between logo and buttons
             Padding(
               padding: const EdgeInsets.all(30),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: EdgeInsets.all(30),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Icon(Icons.book, size: 80),
-                            ],
-                          ),
-                          SizedBox(height: 8),
-                          ElevatedButton(
-                            onPressed: () => Get.toNamed(Routes.BOOK),
-                            child: Text('List Buku'),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      padding: EdgeInsets.all(30),
-                      child: Column(
-                        children: [
-                          Stack(
-                            children: [
-                              Icon(Icons.assignment, size: 80),
-                            ],
-                          ),
-                          SizedBox(height: 8),
-                          ElevatedButton(
-                            onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
-                            child: Text('Peminjaman'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20), // Add some space between buttons and columns
-            Center(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    padding: EdgeInsets.all(30),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Icon(Icons.money, size: 80),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        ElevatedButton(
-                          onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
-                          child: Text('Cek Denda'),
-                        ),
-                      ],
+                  Expanded(
+                    child: _buildFeatureButton(
+                      icon: Icons.book,
+                      label: 'List Buku',
+                      route: Routes.BOOK,
                     ),
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
+                  Expanded(
+                    child: _buildFeatureButton(
+                      icon: Icons.assignment,
+                      label: 'Peminjaman',
+                      route: Routes.PEMINJAMAN,
                     ),
-                    padding: EdgeInsets.all(30),
-                    child: Column(
-                      children: [
-                        Stack(
-                          children: [
-                            Icon(Icons.arrow_circle_up, size: 80),
-                          ],
-                        ),
-                        SizedBox(height: 8),
-                        ElevatedButton(
-                          onPressed: () => Get.toNamed(Routes.PEMINJAMAN),
-                          child: Text('Pengembalian'),
-                        ),
-                      ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 0), // Add some space between buttons and columns
+            Padding(
+              padding: const EdgeInsets.all(30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: _buildFeatureButton(
+                      icon: Icons.money,
+                      label: 'Cek Denda',
+                      route: Routes.PEMINJAMAN,
+                    ),
+                  ),
+                  Expanded(
+                    child: _buildFeatureButton(
+                      icon: Icons.arrow_circle_up,
+                      label: 'Pengembalian',
+                      route: Routes.PEMINJAMAN,
                     ),
                   ),
                 ],
@@ -190,6 +142,30 @@ class HomeView extends GetView<HomeController> {
         },
       ),
     );
+  }
 
+  Widget _buildFeatureButton({required IconData icon, required String label, required String route}) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.all(30),
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Icon(icon, size: 80),
+            ],
+          ),
+          SizedBox(height: 8),
+          ElevatedButton(
+            onPressed: () => Get.toNamed(route),
+            child: Text(label),
+          ),
+        ],
+      ),
+    );
   }
 }
