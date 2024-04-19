@@ -10,14 +10,8 @@ class RegisterView extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Registrasi',
-          style: TextStyle(
-            color: Colors.black, // Set the text color to black
-          ),
-        ),
+        title: const Text('Registrasi'),
         centerTitle: true,
-        backgroundColor: Colors.white, // Set the background color of the app bar to white
       ),
       backgroundColor: Colors.black,
       body: Center(
@@ -117,28 +111,14 @@ class RegisterView extends GetView<RegisterController> {
                 },
               ),
               SizedBox(height: 20), // Add spacing
-              Obx(
-                    () => controller.loading.value
-                    ? CircularProgressIndicator()
-                    : Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0), // Adjust the border radius for a slightly oval shape
-                    color: Colors.white, // Set the background color to white
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      controller.add();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0), // Set the button shape to match the container's shape
-                      ),
-                      primary: Colors.white, // Set the button color to white
-                    ),
-                    child: Text("Registrasi", style: TextStyle(color: Colors.black)), // Set the text color to black
-                  ),
-                ),
-              ),
+              Obx(() => controller.loading.value
+                  ? CircularProgressIndicator()
+                  : ElevatedButton(
+                onPressed: () {
+                  controller.register();
+                },
+                child: Text("Registrasi"),
+              )),
               SizedBox(height: 10), // Add spacing
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
