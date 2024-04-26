@@ -20,7 +20,7 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
           controller: controller.tanggalpinjamController,
           firstDate: DateTime(2000),
           lastDate: DateTime(2100),
-          dateLabelText: 'Date',
+          dateLabelText: 'Tanggal Pinjam',
           dateMask: 'yyyy-MM-dd',
           onChanged: (val) => print(val),
           validator: (val) {
@@ -33,7 +33,7 @@ class AddPeminjamanView extends GetView<AddPeminjamanController> {
           controller: controller.tanggalkembaliController,
           firstDate: DateTime(2000),
           lastDate: DateTime(2100),
-          dateLabelText: 'Date',
+          dateLabelText: 'Tanggal kembali',
           dateMask: 'yyyy-MM-dd',
           onChanged: (val) => print(val),
           validator: (val) {

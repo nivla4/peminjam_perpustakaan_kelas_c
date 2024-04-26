@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../data/provider/storage_provider.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
@@ -57,7 +58,11 @@ class HomeView extends GetView<HomeController> {
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('Keluar'),
-              onTap: () => Get.toNamed(Routes.LOGIN), // Navigate to login page
+              onTap: () => {
+                StorageProvider.write(StorageKey.status, ''),
+                Get.toNamed(Routes.LOGIN),
+                Get.snackbar("Success", "Berhasil Logout", backgroundColor: Colors.lightGreen)
+              }, // Navigate to login page
             ),
           ],
         ),
@@ -87,30 +92,7 @@ class HomeView extends GetView<HomeController> {
                   Expanded(
                     child: _buildFeatureButton(
                       icon: Icons.assignment,
-                      label: 'Peminjaman',
-                      route: Routes.PEMINJAMAN,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 0), // Add some space between buttons and columns
-            Padding(
-              padding: const EdgeInsets.all(30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: _buildFeatureButton(
-                      icon: Icons.money,
-                      label: 'Cek Denda',
-                      route: Routes.PEMINJAMAN,
-                    ),
-                  ),
-                  Expanded(
-                    child: _buildFeatureButton(
-                      icon: Icons.arrow_circle_up,
-                      label: 'Pengembalian',
+                      label: 'Riwayat',
                       route: Routes.PEMINJAMAN,
                     ),
                   ),
