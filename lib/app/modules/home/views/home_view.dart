@@ -42,9 +42,11 @@ class HomeView extends GetView<HomeController> {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Pengaturan'),
+              leading: Icon(Icons.key),
+              title: Text('Ganti Password'),
               onTap: () {
+                StorageProvider.write(StorageKey.status, '');
+                Get.toNamed(Routes.GANTI_PASSWORD);
                 // Navigate to appropriate route
               },
             ),
@@ -82,18 +84,41 @@ class HomeView extends GetView<HomeController> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Expanded(
-                    child: _buildFeatureButton(
-                      icon: Icons.book,
-                      label: 'List Buku',
-                      route: Routes.BOOK,
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(Routes.BOOK);
+              },
+                    child: Expanded(
+                      child:
+                      _buildFeatureButton(
+                        icon: Icons.book,
+                        label: 'List Buku',
+                        route: Routes.BOOK,
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: _buildFeatureButton(
-                      icon: Icons.assignment,
-                      label: 'Riwayat',
-                      route: Routes.PEMINJAMAN,
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(Routes.PEMINJAMAN);
+                    },
+                    child: Expanded(
+                      child: _buildFeatureButton(
+                        icon: Icons.assignment,
+                        label: 'Riwayat',
+                        route: Routes.PEMINJAMAN,
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                      Get.toNamed(Routes.KATEGORI);
+                    },
+                    child: Expanded(
+                      child: _buildFeatureButton(
+                        icon: Icons.category,
+                        label: 'Kategori',
+                        route: Routes.KATEGORI,
+                      ),
                     ),
                   ),
                 ],
@@ -108,10 +133,7 @@ class HomeView extends GetView<HomeController> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
+
           BottomNavigationBarItem(
             icon: Icon(Icons.people),
             label: 'Profil',
